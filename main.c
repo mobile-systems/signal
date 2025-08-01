@@ -15,7 +15,8 @@
 volatile int footprint=0;
 
 void catcher(int signum) {
-  puts("inside signal catcher!");
+  //puts("inside signal catcher!");
+  fprintf(stdout, "inside signal catcher!");
   footprint = 1;
 }
 
@@ -26,14 +27,14 @@ void main(void) {
     const char* dbUser = getenv("DB_USER");
     const char* dbPwd = getenv("DB_PWD");
     if (path != NULL) {
-        printf("PATH: %s\n", path);
+        fprintf(stdout, "PATH: %s\n", path);
     } else {  
-        puts("PATH variable not found.");
+        fprintf(stderr, "PATH variable not found.");
     }  
     if (dbHost != NULL) {
-        printf("Database Host: %s\n", path);
+        fprintf(stdout, "Database Host: %s\n", dbHost);
     } else {  
-        puts("Database Host variable not found.");
+        fprintf(stderr, "Database Host variable not found.");
         EXIT_FAILURE;
     }  
 
@@ -49,15 +50,15 @@ void main(void) {
   alarm(60); /* timer will pop in 60 seconds */
 
   time(&t);
-  printf("before loop, time is %s", ctime(&t));
+  fprintf(stdout, "before loop, time is %s", ctime(&t));
   for (count=0; (count<9*1e10) && (footprint == 0); count++);
   time(&t);
-  printf("after loop, time is %s", ctime(&t));
+  fprintf(stdout, "after loop, time is %s", ctime(&t));
 
-  printf("the sum so far is %.0f\n", count);
+  fprintf(stdout, "the sum so far is %.0f\n", count);
 
   if (footprint == 0)
-    puts("the signal catcher never gained control");
+    fprintf(stderr, "the signal catcher never gained control");
   else
-    puts("the signal catcher gained control");
+    fprintf(stdout, "the signal catcher gained control");
 }
