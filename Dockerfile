@@ -1,4 +1,4 @@
-FROM registry.astralinux.ru/library/astra/ubi18:1.8.2.uu1
+FROM registry.astralinux.ru/library/astra/ubi18:1.8.4
 LABEL "org.opencontainers.image.vendor"="Alexander Ocheretin <mobidev@yandex.ru>"
 WORKDIR /tmp
 
